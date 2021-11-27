@@ -20,15 +20,11 @@ export const signIn = (formdata) => async (dispatch) => {
   }
 };
 
-export const createUser = (formdata) => async (dispatch) => {
+export const signUp = (formdata) => async (dispatch) => {
   try {
-    const res = await axios.post(
-      `${baseUrl}/api/user/createuser`,
-      formdata,
-      config
-    );
+    const res = await axios.post(`${baseUrl}/api/user/signup`, formdata);
 
-    dispatch({ type: "GET_SUCCESS_MSG", payload: res?.data });
+    dispatch({ type: "AUTH_SUCCESS", payload: res?.data });
   } catch (error) {
     dispatch({
       type: "GET_ERROR_MSG",

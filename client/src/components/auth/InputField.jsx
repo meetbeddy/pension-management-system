@@ -1,7 +1,15 @@
 import React from "react";
 import { Form } from "react-bootstrap";
 
-function InputField({ label, type, name, placeholder, value, onChange }) {
+function InputField({
+  label,
+  type,
+  name,
+  placeholder,
+  value,
+  onChange,
+  error,
+}) {
   return (
     <div className="row px-3">
       <Form.Group controlId={`formBasic${name}`}>
@@ -16,7 +24,9 @@ function InputField({ label, type, name, placeholder, value, onChange }) {
           placeholder={placeholder}
           value={value}
           onChange={onChange}
+          isInvalid={!!error}
         />
+        <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
       </Form.Group>
     </div>
   );

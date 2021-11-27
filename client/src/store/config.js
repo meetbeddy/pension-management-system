@@ -12,5 +12,4 @@ export const getConfig = (getState) => {
   }
 };
 
-export const localUrl = "http://localhost:5000";
-export const baseUrl = "https://desolate-woodland-08640.herokuapp.com";
+export const baseUrl = "http://localhost:5000";

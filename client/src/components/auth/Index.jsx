@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import InputField from "./InputField";
+import { signIn, signUp } from "../../store/actions/authActions";
+import { clearNotifications } from "../../store/actions/notificationsActions";
+import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
 import "./login.css";
 
 function Auth(props) {
   const [authType, setAuthType] = useState();
+  const [error, setError] = useState({});
   const [inputValue, setInputValue] = useState({
     firstName: "",
     lastName: "",
@@ -14,14 +19,58 @@ function Auth(props) {
     confirmPassword: "",
   });
 
+  const notification = useSelector((state) => state.notification);
   React.useEffect(() => {
     setAuthType(props.type);
   }, [props.type]);
-
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
+  React.useEffect(() => {
+    if (notification.errors) {
+      toast.success(notification.errors.message);
+      return dispatch(clearNotifications());
+    }
+  });
+  const findErrors = () => {
+    const { firstName, lastName, phone, email, password, confirmPassword } =
+      inputValue;
+    const newErrors = {};
+    if (!firstName || firstName === "") {
+      newErrors.firstName = "field cannot be blank!";
+    }
+    if (!lastName || lastName === "") {
+      newErrors.lastName = "field cannot be blank!";
+    }
+    if (!phone || phone === "") {
+      newErrors.phone = "field cannot be blank!";
+    }
+    if (!email || email === "") {
+      newErrors.email = "field cannot be blank!";
+    }
+    if (!password || password === "") {
+      newErrors.password = "field cannot be blank!";
+    }
+    if (!confirmPassword || confirmPassword === "") {
+      newErrors.confirmPassword = "field cannot be blank!";
+    }
+    return newErrors;
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (authType === "signin") {
+      dispatch(signIn(inputValue));
+    } else {
+      const newErrors = findErrors();
+      if (Object.keys(newErrors).length > 0) {
+        setError(newErrors);
+      } else {
+        dispatch(signUp(inputValue));
+      }
+    }
+  };
   return (
     <div className="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
       <div className="card card0 border-0">
@@ -67,6 +116,7 @@ function Auth(props) {
                     value={inputValue.firstName}
                     onChange={handleChange}
                     placeholder="enter first name"
+                    error={error.firstName}
                   />
                   <InputField
                     label="Last Name"
@@ -75,6 +125,7 @@ function Auth(props) {
                     value={inputValue.lastName}
                     onChange={handleChange}
                     placeholder="enter last name"
+                    error={error.lastName}
                   />
                   <InputField
                     label="Phone Number"
@@ -83,6 +134,7 @@ function Auth(props) {
                     value={inputValue.phone}
                     onChange={handleChange}
                     placeholder="enter phone number"
+                    error={error.phone}
                   />{" "}
                 </>
               )}
@@ -93,6 +145,7 @@ function Auth(props) {
                 value={inputValue.email}
                 onChange={handleChange}
                 placeholder="enter email"
+                error={error.email}
               />
               <InputField
                 label="Password"
@@ -101,6 +154,7 @@ function Auth(props) {
                 value={inputValue.password}
                 onChange={handleChange}
                 placeholder="enter password"
+                error={error.password}
               />
               {authType === "register" && (
                 <InputField
@@ -110,6 +164,7 @@ function Auth(props) {
                   value={inputValue.confirmPassword}
                   onChange={handleChange}
                   placeholder="confirm password"
+                  error={error.confirmPassword}
                 />
               )}
               <div className="row px-3 mb-4">
@@ -121,7 +176,11 @@ function Auth(props) {
               </div>
               <div className="row mb-3 px-3">
                 {" "}
-                <button type="submit" className="btn btn-blue text-center">
+                <button
+                  type="submit"
+                  className="btn btn-blue text-center"
+                  onClick={handleSubmit}
+                >
                   {authType === "signin" ? "Login" : "Register"}
                 </button>{" "}
               </div>
@@ -145,6 +204,7 @@ function Auth(props) {
           </div>
         </div>
       </div>
+      <ToastContainer position="top-center" />
     </div>
   );
 }
