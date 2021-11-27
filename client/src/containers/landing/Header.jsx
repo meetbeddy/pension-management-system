@@ -36,14 +36,14 @@ function Header() {
               </a>
             </li>
             <li>
-              <Link to="/signin" className="getstarted scrollto" href="#about">
+              <Link to="/auth/signin" className="getstarted scrollto">
                 Login
               </Link>
             </li>
             <li>
-              <a className="getstarted scrollto" href="#about">
+              <Link to="/auth/register" className="getstarted scrollto">
                 Get Started
-              </a>
+              </Link>
             </li>
           </ul>
           <i className="bi bi-list mobile-nav-toggle" />
