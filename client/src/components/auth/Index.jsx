@@ -20,6 +20,7 @@ function Auth(props) {
   });
 
   const notification = useSelector((state) => state.notification);
+
   React.useEffect(() => {
     setAuthType(props.type);
   }, [props.type]);
@@ -29,11 +30,12 @@ function Auth(props) {
   };
 
   React.useEffect(() => {
-    if (notification.errors) {
-      toast.success(notification.errors.message);
+    if (notification.errors.message) {
+      const { message } = notification.errors;
+      toast.error(message);
       return dispatch(clearNotifications());
     }
-  });
+  }, [dispatch, notification]);
   const findErrors = () => {
     const { firstName, lastName, phone, email, password, confirmPassword } =
       inputValue;

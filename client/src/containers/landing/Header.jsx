@@ -9,9 +9,9 @@ function Header() {
           <a href="index.html">Pen Safe</a>
         </h1>
         {/* Uncomment below if you prefer to use an image logo */}
-        <a href="index.html" class="logo me-auto">
-          <img src="assets/img/logo.png" alt="" class="img-fluid" />
-        </a>
+        {/* <a href="index.html" class="logo me-auto">
+          <img src="assets/img/logo.png" alt="" className="img-fluid" />
+        </a> */}
         <nav id="navbar" className="navbar">
           <ul>
             <li>
