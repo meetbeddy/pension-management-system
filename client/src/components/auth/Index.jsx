@@ -5,6 +5,7 @@ import { signIn, signUp } from "../../store/actions/authActions";
 import { clearNotifications } from "../../store/actions/notificationsActions";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
+import { Routes, Route, Navigate } from "react-router";
 import "./login.css";
 
 function Auth(props) {
@@ -73,6 +74,15 @@ function Auth(props) {
       }
     }
   };
+  console.log(props);
+  if (props.user) {
+    return (
+      <Routes>
+        <Route path="*" element={<Navigate replace to="/dashboard" />} />
+      </Routes>
+    );
+  }
+
   return (
     <div className="container-fluid px-1 px-md-5 px-lg-1 px-xl-5 py-5 mx-auto">
       <div className="card card0 border-0">

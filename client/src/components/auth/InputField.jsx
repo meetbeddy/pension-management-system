@@ -8,15 +8,13 @@ function InputField({
   placeholder,
   value,
   onChange,
+  className,
   error,
 }) {
   return (
-    <div className="row px-3">
-      <Form.Group controlId={`formBasic${name}`}>
-        <Form.Label className="mb-1">
-          {" "}
-          <h6 className="mb-0 text-sm">{label}</h6>
-        </Form.Label>
+    <>
+      <Form.Group controlId={`formBasic${name}`} className={className}>
+        <Form.Label className="mb-1"> {label}</Form.Label>
         <Form.Control
           className="mb-4"
           type={type}
@@ -28,7 +26,7 @@ function InputField({
         />
         <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
       </Form.Group>
-    </div>
+    </>
   );
 }
 

@@ -40,7 +40,8 @@ exports.signIn = async (req, res) => {
  @access public*/
 
 exports.signUp = async (req, res) => {
-  const { fullname, email, password, confirmpassword, phone } = req.body;
+  const { firstName, lastName, email, password, confirmPassword, phone } =
+    req.body;
 
   try {
     const existingUser = await User.findOne({ email: email });
@@ -48,7 +49,7 @@ exports.signUp = async (req, res) => {
     if (existingUser) {
       return res.status(404).json({ message: "user already exist" });
     }
-    if (password !== confirmpassword) {
+    if (password !== confirmPassword) {
       return res.status(404).json({ message: "password doesn't match" });
     }
     const hashedpassword = await bcrypt.hash(password, 12);
@@ -61,7 +62,7 @@ exports.signUp = async (req, res) => {
       }
     );
     const user = await User.create({
-      name: fullname,
+      name: firstName + " " + lastName,
       email,
       phone,
       password: hashedpassword,
