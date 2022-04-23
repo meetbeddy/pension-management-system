@@ -1,245 +1,4 @@
 {
-  "Header": {
-    "title": "We simplify your financial needs and operations",
-    "paragraph": "We provide loan for our members, stock consumer and producer goods for distribution to members, provide professional/financial advisory services and much more. Register now and get notifications on cooperative activities on the go."
-  },
-  "About": {
-    "paragraph": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    "Why": [
-      "Lorem ipsum dolor",
-      "Tempor incididunt",
-      "Lorem ipsum dolor",
-      "Incididunt ut labore"
-    ],
-    "Why2": [
-      "Aliquip ex ea commodo",
-      "Lorem ipsum dolor",
-      "Exercitation ullamco",
-      "Lorem ipsum dolor"
-    ]
-  },
-  "Services": [
-    {
-      "icon": "fa fa-money-check-alt",
-      "name": "Thrift Collection",
-      "text": "We encourage thrift among members so that each member may cultivate the habit of making savings at least once monthly, with a view to building up funds for their individual future use."
-    },
-    {
-      "icon": "fa fa-info-circle",
-      "name": "Financial Adivisory",
-      "text": "We provide professional/Financial Advisory Services - Investment appraisal, feasibility studies, business plans etc."
-    },
-    {
-      "icon": "fa fa-hands-helping",
-      "name": "Short Term Loans",
-      "text": "We provide short-term loans for our members at a minimal interest rate with convenient terms of repayment."
-    },
-    {
-      "icon": "fa fa-store",
-      "name": "Goods and Services",
-      "text": "We stock consumer and producer goods for distribution to members and non-members; (with priority to members) at fair and reasonable prices."
-    },
-    {
-      "icon": "fa fa-store-alt",
-      "name": "Warehouse Facilities",
-      "text": "We operate warehouses and cold room facilities for the storage of consumer and producer goods and let out these facilities to interested parties;"
-    },
-    {
-      "icon": "fa fa-city",
-      "name": "Real estates",
-      "text": "We undertake investment in Real Estate and Housing developments for the acquisition of our members and other interested parties."
-    }
-  ],
-  "Testimonials": [
-    {
-      "text": "A Cooperative Society is a voluntary association of individuals or legal persons united by common bond, who have come together to pursue their socio-economic goals for their own benefits with high regards to non-members as their neighbors. ",
-      "name": "What is a Cooperative Society?"
-    },
-    {
-      "text": "The objects of the Society are to promote the economic interests of its members and especially: \r\n\r\n a.\tTo encourage thrift among members so that each member may cultivate the habit of making savings at least once monthly, with a view to building up funds for their individual future use; \r\n\r\n b.\tTo enable members to obtain loans from the society at a minimal interest rate with convenient terms of repayment. \r\n\r\n c.\tTo promote mutual co-operation among members. \r\n\r\n d.\tTo stock consumer and producer goods for distribution to members and non-members; (with priority to members) at fair and reasonable prices.\r\n\r\n e.\tTo operate warehouses and cold room facilities for the storage of these consumer and producer goods and let out these facilities to interested parties; \r\n\r\n f.\tTo acquire acres of land for sale, lease or Estate development to meet the housing needs of members or for residential, commercial or industrial purposes as a form of investment for the economic benefit of members and other interested parties; \r\n\r\n g.\tTo undertake and invest in new ventures beneficial to its members and the Society as approved by the Management Committee. These include Projects Financing; Feasibility Studies, business plan etc. \r\n\r\n h.\tTo undertake service businesses that will cater for the primary needs of members and other patrons managed in the overall interest of members and the Society. \r\n\r\n i.\tTo undertake such financial management schemes like Special Withdraw-able Deposit and Community Banking Schemes at co-operative and competitive rates for members and other interested parties. \r\n\r\n j.\tTo encourage fixed deposits from members out of which a fund may be established for giving short-term loans to members, to acquire stock of shares and other rewarding ventures; \r\n\r\n  k.\tTo raise funds through share holdings by members in the Society to undertake such other activities as are necessary for the attainment of these objects; \r\n\r\n l.\tTo invest in Agricultural products. This will include crop and animal farming, buying and selling of Agricultural products and any other agricultural activity. \r\n\r\n m.\tTo engage in other economic or social activity as may be approved by the Management Committee or the general meeting of members. \r\n\r\n n.\tTo seek loans for residential, commercial or industrial housing development from banks, the co-operative circle and other financial institutions; \r\n\r\n o.\tTo secure wholesale mortgage, either for on-lending to members or for housing development and let or sell such dwellings on mortgage basis; \r\n\r\n p.\tTo do anything within the law and enter into any transaction which in the Society\u2019s opinion is necessary to ensure the proper performance of its functions or the attainment of the above listed objects. ",
-      "name": "What are the Objectives of the Lion Multi-purpose Cooperative Society Nigeria Ltd?"
-    },
-    {
-      "text": "\"This means a person or a registered society joining in the application for registration of a society or admitted to be a member after registration in accordance with bye-laws and regulations of the society.\"",
-      "name": "What does being a registered member of the society mean?"
-    },
-    {
-      "text": "\"Make your thrift savings; actively participate in all AGMs; engage and exchange valuable ideas with Management Committee members; render any other services as may be required in any capacity in the society.\"",
-      "name": "What are my main responsibilities as a member of the Society?"
-    },
-    {
-      "text": "A non-refundable entrance fee of N2,000.00 shall be paid by a new applicant or such other amount as may be fixed by the Management Committee or the general meeting.",
-      "name": "Is there a fee payable on application for membership of the society?"
-    },
-    {
-      "text": "Every member shall on admission sign his or her name or make his or her right thumb impression in the register or be included in the register in any other suitable and convenient form as may be agreed by the Management Committee or the general meeting.",
-      "name": "What should I do next on admission as a member of the society?"
-    },
-    {
-      "text": "\"This is a share of the surplus of a registered society divided among its members in proportion to the volume of business done by them in the society for which the surplus is derived.\"",
-      "name": "What is Patronage Rebate?"
-    },
-    {
-      "text": "\"Dividend means a share of the profits of a registered society divided among its members in proportion to share capital held by them.\"",
-      "name": "What is Dividend?"
-    },
-    {
-      "text": "\"Yes, by conveying 6 months notice in writing to the General Secretary and provided such a member is not indebted to the society or standing as surety for a loan of another member that is not yet paid up.\"",
-      "name": "Can a member withdraw his/her membership?"
-    },
-    {
-      "text": "\"One ceases to be a member of the Society under any of the following conditions:\r\n\r\n  - Death \r\n\r\n- Cessation of employment as specified in the Bye-Laws\r\n\r\n- Ceases to be of sound mind \r\n\r\n- Ceases to reside in the area of operation of the Society as specified in the Bye-laws\r\n\r\n- Expulsion from the Society by 2/3 majority votes at a General meeting for acts of misconduct or gross indiscipline.\"",
-      "name": "Under what conditions can one lose his/her membership status?"
-    },
-    {
-      "text": "\"Yes, provided a reasonable interval of not less than 12 calendar months from date of withdrawal of membership is given.\"",
-      "name": "Can I reapply for membership after withdrawal?"
-    },
-    {
-      "text": "\"A financial report of the society is presented to all members at the AGM.\"",
-      "name": "How do I get briefed on the performance of the Cooperative Society?"
-    },
-    {
-      "text": "\"Member's ordinary savings contribution shall be paid to the treasurer at ordinary general meeting or deducted from his/her salary and remitted directly to the cooperatives bank account.\"",
-      "name": "How do I make contribution for ordinary savings?"
-    },
-    {
-      "text": "\"No member can withdraw part or whole of his Ordinary savings except on withdrawal of Membership and a service charge of 10% will apply on such withdrawals.\"",
-      "name": "Can I withdraw a part of my thrift credit contribution as any time?"
-    },
-    {
-      "text": "\"Yes; you can write to the Financial Secretary to obtain your account statement or better still, visit the Society's website with your unique log in details to get your account statement.\"",
-      "name": "Can I request for my account statement as to know total thrift credit contribution I have made?"
-    },
-    {
-      "text": "\"Visit the society website and fill the Loan application form. The Management committee shall review request, approve and advise you on the amount approved. Loans request are treated on its merit and approval limits are subject to funds availability.\"",
-      "name": " How do I obtain Loan facility from the Cooperative?"
-    },
-    {
-      "text": "\"Your loan limit is thrice (3 times) the total amount of your contribution at the time of submitting request.\"",
-      "name": "What is the maximum loan limit I am entitled to request for?"
-    },
-    {
-      "text": "Loans are to be paid back within 12 calendar months. However waivers for 24 months may be granted on the merit of the request by the Management Committee. This might attract additional interest.",
-      "name": "What is the maximum Tenor for the loan to be repaid?"
-    },
-    {
-      "text": "\"N5,000.00 per month.\"",
-      "name": "What is the minimum thrift savings amount I can contribute monthly?"
-    },
-    {
-      "text": "\"Loans shall be made only to persons of a minimum of 6 months membership.\"",
-      "name": "On joining the cooperative, how soon can I be considered for a loan on request?"
-    },
-    {
-      "text": "The Executive or Management committee shall consist of at least Seven (7) and not more than Eleven (11) members elected at annual general meeting and not more than four (4) Ex-officio members, at least two (2) of who shall be the immediate past President and General Secretary. At the event of the vacancy occurring during the year, he/her shall be elected at any General meeting. Any member aspiring for the position of the President, General Secretary and Treasurer must have spent not less than two (2) years as a member of the cooperative society. ",
-      "name": "What is Management Committee? "
-    },
-    {
-      "text": "Members\u2019 one year normal loan   -11%.\r\n\r\nMembers\u2019 two years normal loan    -15%.\r\n\r\nMembers\u2019 Housing project loan    -15%.\r\n\r\nMembers\u2019 land loan    -16%.\r\n\r\nMembers\u2019 car loan    -16%.\r\n\r\nMembers\u2019 motocycle loan    -16%.\r\n\r\nMembers\u2019 tricycle loan    -16%.\r\n\r\nMembers\u2019 mark-up for Commodity Purchase    -5%.\r\n\r\nMembers\u2019 mark-up for Electronics Purchase    -7%.\r\n\r\nMembers\u2019 mark-up for Stationary Purchase    -7%.\r\n\r\nMembers\u2019 mark-up for Office Equipment purchase    -7%.\r\n\r\nMembers\u2019 emergency loan (not exceeding one year)   -19%.\r\n\r\nEducation Savings (Withdrawable at the end of each year)   -5%.\r\n\r\nChristmas Savings (Withdrawable at the end of each year)   -4%.\r\n\r\nSpecial Deposits(withdrawable within one year    -4%.\r\n\r\nLocal purchasing order financing(as may be agreed but not less than)    -19%.\r\n\r\nCharges on Retirement Savings    -10%.\r\n\r\nLoan handling charges (0.25% of total loan request)\r\n\r\nInvestment Appraisal/Feasility Study(Fee as agreed)\r\n\r\nInterest on loan and handling charges shall be collected up-front before disbursement of loan balance to the beneficiary",
-      "name": "What are the interest rates for each type of credits?"
-    },
-    {
-      "img": "img/testimonials/06.jpg",
-      "text": "Interest on loan and handling charges shall be collected up-front before disbursement of loan balance to the beneficiary.",
-      "name": "At what point am I expected to pay interest on loan and handling charges?"
-    },
-    {
-      "img": "img/testimonials/06.jpg",
-      "text": "The loan shall be repaid in equal monthly installments, the number of which shall not normally exceed twelve or twenty-four months or any other period as may be agreed by the management committee or the general meeting.\r\n\r\n a. The first installment shall fall due at the end of the month following the month in which the loan is taken.\r\n\r\n b. In all cases, repayment by installment shall go simultaneously with the payment of ordinary savings and special savings.\r\n\r\n  c. Loan may be immediately recalled by the committee if misapplied and the member shall execute a bond or post-dated cheque in favour of the society and for every loan taken, two sureties shall be provided or collateral security where the loan exceeds the member’s savings. In addition, loan application shall be submitted with an affidavit of repayment covenant.",
-      "name": "What other information can assist me make a loan decision?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "The general meeting shall be held monthly or at least once in every three months or at any other shorter or convenient time.",
-      "name": "How often am I expected to participate in the general meeting?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "I should have attained the age of 16, be of good character, capable of paying my dues and resident in the area of operation of the society or any other place acceptable to the Cooperative.",
-      "name": "How do I know if I am qualified/eligible to become a Member of the Society?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "An Entrance fee of N2,000.00 shall be paid by a new applicant or such other amount as may be fixed by the Management Committee.",
-      "name": "Is there a fee payable on application for membership of the society?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "Every member shall on admission sign his or her name or make his or her right thumb impression in the register or be included in the register in any other suitable and convenient form as may be agreed by the Management Committee or the general meeting.",
-      "name": "What should I do next on admission as a member of the society?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "This is the minimum compulsory and non-withdrawable amount each member is expected to contribute in order to become a part owner of the society. The current minimum share capital is N100,000.00 which can be paid within the first 20 months of admission to membership. This amount can be reviewed by the management committee subject to approval of 2/3 of the general meeting.",
-      "name": " What is minimum Share Capital?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "Maximum Share capital is the upper limit a member is allowed to contribute as part owner of the society. The current maximum share capital is N5,000,000.00 which can be upgraded at any time. This amount can be reviewed by the management committee subject to approval of 2/3 of the general meeting.",
-      "name": "What is maximum Share Capital?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "Ordinary savings is the normal non-withdrawable contribution made by members of the society, which enables them to access loans that are at least three times the total of their savings. Members are to contribute a minimum of N5,000.00 as monthly savings or any other amount that might be subsequently approved by the general meeting or the management committee.",
-      "name": "What is Ordinary Savings and the minimum monthly savings?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "In addition to his/her ordinary savings, member may make special savings which may be withdrawn, leaving minimum of one month’s contribution in this account or withdrawal of the entire sum after deduction of a service charge by the cooperative Society as may be determined or once in every three months, provided that a committee may require not less than two weeks notice to that effect for emergency or on the 14th day of every month for normal withdrawal.",
-      "name": " What is Special Savings?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "A retirement savings can be made and withdraw-able on retirement or any other stated period that is not less than 10years. This type of savings will enable the owner benefit a minimum of 4% annual interest.",
-      "name": "What is retirement savings?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "A member may make any deposits of any amount at any time and these may be withdrawn as required provided that not less than a month notice shall be required for withdrawal of large amount.",
-      "name": " What is Special Deposits?"
-    },
-    {
-      "img": "img/testimonials/04.jpg",
-      "text": "Buffer savings are irregular deposits made as part of a member’s ordinary savings. However, savings made with the intention to apply for immediate loan is not acceptable, except the member depositing the amount will wait for at least 3 months after buffer savings before applying for loan.",
-      "name": "What is buffer savings and what are the conditions to be granted a loan request after buffer savings?"
-    }
-  ],
-
-  "Contact": {
-    "address": "Suite 116, Continuing Education Centre UNGEL Guest House (CEC), University of Nigeria Main Campus, Nsukka, Enugu State, Nigeria",
-    "phone": "+234 (0) 8034077466",
-    "phone2": "+234 (0) 912 440 1489",
-    "phone3": "+234 (0) 8101451314",
-    "phone4": "+234 (0) 803 881 4734   ",
-    "email": "lmcsnigltd@gmail.com",
-    "facebook": "fb.com",
-    "twitter": "twitter.com",
-    "youtube": "youtube.com"
-  },
-  "Features": [
-    {
-      "icon": "fa fa-piggy-bank",
-      "title": "Savings and loans",
-      "text": "We encourage thrift among members so that each member may cultivate the habit of making savings at least once monthly, with a view to building up funds for their individual future use."
-    },
-    {
-      "icon": "fa fa-calculator",
-      "title": "Accounting and reporting",
-      "text": "All financial transcations are managed by a customized cloud-based electronic acounting software which processes deposits, withdawals,loans and other transactions and draws /issues the appropraite ledgers, documents and reciepts to members emails"
-    },
-    {
-      "icon": "fa fa-shield-alt",
-      "title": "safety and security",
-      "text": "Our system is backed by multi tiered architecture that provides added security to all transation done on our platform. Rest assured, your money is safe with us"
-    },
-    {
-      "icon": "fa fa-magic",
-      "title": "Best rates",
-      "text": "Access loans with minimal interest rate and convinient terms of payment."
-    }
-  ],
-
   "Dashboard": [
     {
       "id": 1,
@@ -279,45 +38,24 @@
       "path": "/dashboard/balances",
       "admin": false
     },
-    {
-      "id": 5,
-      "name": "Confirm users",
-      "icon": "far fa-circle nav-icon",
-      "path": "/dashboard/confirmuser",
-      "type": "single",
-      "admin": true
-    },
-    {
-      "id": 6,
-      "name": "View members",
-      "icon": "far fa-circle nav-icon",
-      "path": "/dashboard/viewmembers",
-      "type": "single",
-      "admin": true
-    },
+
     {
       "id": 17,
-      "name": "Commodity",
+      "name": "Manage Employees/Pensioners",
       "icon": "far fa-circle nav-icon",
       "type": "multiple",
       "admin": true,
       "inner": [
         {
           "id": 1,
-          "name": "add products ",
+          "name": "add new employee ",
           "icon": "far fa-circle nav-icon",
-          "path": "/dashboard/addproduct"
+          "path": "/dashboard/addemployee"
         },
         {
           "id": 2,
-          "name": "View Products",
-          "path": "/dashboard/products",
-          "icon": "far fa-circle nav-icon"
-        },
-        {
-          "id": 3,
-          "name": "commodity requests",
-          "path": "/dashboard/commodityrequests",
+          "name": "RSA requests",
+          "path": "/dashboard/rsa-request",
           "icon": "far fa-circle nav-icon"
         }
       ]

@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import ContentWrapper from "../components/utilities/ContentWrapper";
 import PersonalData from "./PersonData";
 import EmployerDetails from "./EmployerDetails";
-import MonthlyContribution from "./MonthlyContribution";
 import { Row, Card } from "react-bootstrap";
 import NextOfKins from "./NextOfKins";
 import { connect } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
-// import { clearNotifications } from "../store/actions/notificationsActions";
+import { registerRSA } from "../store/actions/userAction";
+import { clearNotifications } from "../store/actions/notificationsActions";
+import SubmitSuccess from "./SubmitSuccess";
 
 const renderForm = (
   formstep,
@@ -49,17 +50,6 @@ const renderForm = (
       );
     case 3:
       return (
-        <MonthlyContribution
-          nextStep={nextStep}
-          prevStep={prevStep}
-          handleChange={handleChange}
-          error={error}
-          disableButton={disableButton}
-          state
-        />
-      );
-    case 4:
-      return (
         <NextOfKins
           nextStep={nextStep}
           prevStep={prevStep}
@@ -74,6 +64,7 @@ const renderForm = (
           state={state}
         />
       );
+
     default:
   }
 };
@@ -108,6 +99,7 @@ export class RegisterRsa extends Component {
     employerCode: "",
     employmentDate: "",
     gradeLevel: "",
+    salaryStructure: "",
 
     nokFirstName: "",
     nokLastName: "",
@@ -116,27 +108,27 @@ export class RegisterRsa extends Component {
     nokPhone: "",
     nokEmail: "",
 
-    salaryStructure: "",
-    monthlyContribution: "",
-
     formstep: 1,
     terms: false,
     error: {},
     disableButton: true,
+    showSuccess: false,
   };
 
   static getDerivedStateFromProps(nextProps, state) {
-    // console.log(nextProps);
     if (nextProps?.errors?.message) {
       const { message } = nextProps?.errors;
       toast.error(message);
-      return this.props.clearNotifications();
+      return nextProps.clearNotifications();
     }
 
-    const { submissionSuccess } = nextProps.success;
-    if (submissionSuccess) {
-      toast.success(submissionSuccess);
-      return this.props.clearNotifications();
+    if (nextProps.success.message) {
+      const { message } = nextProps.success;
+      toast.success(message);
+      this.setState({ showSuccess: true });
+      return nextProps.clearNotifications();
+
+      //clear state
     }
 
     return null;
@@ -166,6 +158,7 @@ export class RegisterRsa extends Component {
       employerCode,
       employmentDate,
       gradeLevel,
+      salaryStructure,
       nokFirstName,
       nokLastName,
       nokRelationship,
@@ -203,6 +196,7 @@ export class RegisterRsa extends Component {
           employerCode,
           employmentDate,
           gradeLevel,
+          salaryStructure,
         };
       case 3:
         return {
@@ -259,17 +253,22 @@ export class RegisterRsa extends Component {
 
     if (event?.target?.files) {
       const file = event?.target?.files[0];
-      this.setState(
-        {
-          [event?.target?.name]: file,
-          [[event?.target?.name] + "URL"]: URL.createObjectURL(file),
-        },
-        () => {
-          if (checkField || this.checkField()) {
-            this.setState({ disableButton: false });
+      const reader = new FileReader();
+
+      reader.onloadend = () => {
+        this.setState(
+          {
+            [event?.target?.name]: reader.result,
+            [[event?.target?.name] + "URL"]: URL.createObjectURL(file),
+          },
+          () => {
+            if (checkField || this.checkField()) {
+              this.setState({ disableButton: false });
+            }
           }
-        }
-      );
+        );
+      };
+      reader.readAsDataURL(file);
     } else if (event?.target?.name === "terms") {
       this.setState({ terms: !this.state.terms });
     } else {
@@ -282,11 +281,11 @@ export class RegisterRsa extends Component {
       });
     }
 
-    if (!!this.state.error[event?.target?.name])
-      this.setState({
-        ...this.state.error,
-        [event.target.name]: null,
-      });
+    // if (!!this.state.error[event?.target?.name])
+    //   this.setState({
+    //     ...this.state.error,
+    //     [event.target.name]: null,
+    //   });
   };
 
   findError = () => {
@@ -326,15 +325,12 @@ export class RegisterRsa extends Component {
       nokEmail,
 
       salaryStructure,
-      monthlyContribution,
     } = this.state;
     const newErrors = {};
     if (!salaryStructure || salaryStructure === "") {
       newErrors.salaryStructure = "cannot be blank!";
     }
-    if (!monthlyContribution || monthlyContribution === "") {
-      newErrors.monthlyContribution = "cannot be blank!";
-    }
+
     if (!lastName || lastName === "") {
       newErrors.lastName = "cannot be blank!";
     }
@@ -436,112 +432,78 @@ export class RegisterRsa extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
-
-    console.log(this.state);
     const newErrors = this.findError();
     if (Object.keys(newErrors).length > 0) {
       this.setState({ error: newErrors });
     } else {
-      const formData = new FormData();
-      formData.append("title", this.state.title);
-      formData.append("firstName", this.state.firstName);
-      formData.append("lastName", this.state.lastName);
-      formData.append("middleName", this.state.middleName);
-      formData.append("gender", this.state.gender);
-      formData.append("birthDate", this.state.birthDate);
-      formData.append("email", this.state.email);
-      formData.append("phone", this.state.phone);
-      formData.append("state", this.state.state);
-      formData.append("lga", this.state.lga);
-      formData.append("bvn", this.state.bvn);
-      formData.append("nin", this.state.nin);
-      formData.append("homeAddress", this.state.homeAddress);
-      formData.append("signature", this.state.signature);
-      formData.append("passport", this.state.passport);
-      formData.append("workAddress", this.state.workAddress);
-      formData.append("sector", this.state.sector);
-      formData.append("workType", this.state.workType);
-      formData.append("employerPhone", this.state.employerPhone);
-      formData.append("employerName", this.state.employerName);
-      formData.append("employerCode", this.state.employerCode);
-      formData.append("employmentDate", this.state.employmentDate);
-      formData.append("gradeLevel", this.state.gradeLevel);
-      formData.append("nokFirstName", this.state.nokFirstName);
-      formData.append("nokLastName", this.state.nokLastName);
-      formData.append("nokRelationship", this.state.nokRelationship);
-      formData.append("nokAddress", this.state.nokAddress);
-      formData.append("nokPhone", this.state.nokPhone);
-      formData.append("nokEmail", this.state.nokEmail);
-      formData.append("salaryStructure", this.state.salaryStructure);
-      formData.append("monthlyContribution", this.state.monthlyContribution);
-
-      console.log("here");
-
-      // this.props.signup(formData);
+      this.props.register(this.state);
     }
   };
 
   render() {
     const { formstep, error, disableButton, passportURL, signatureURL, terms } =
       this.state;
-
     return (
       <ContentWrapper>
-        <div id="grad1" className="justify-content-center ">
-          <div className="col-12  col-md-12 col-lg-12 text-center p-0 mt-3 mb-2">
-            <Card className="px-0 pt-4 pb-0 mt-3 mb-3">
-              <h2>
-                <strong>RSA REGISTRATION</strong>
-              </h2>
+        {!this.state.showSuccess ? (
+          <SubmitSuccess />
+        ) : (
+          <div id="grad1" className="justify-content-center ">
+            <div className="col-12  col-md-12 col-lg-12 text-center p-0 mt-3 mb-2">
+              <Card className="px-0 pt-4 pb-0 mt-3 mb-3">
+                <h2>
+                  <strong>RSA REGISTRATION</strong>
+                </h2>
 
-              <Row>
-                <div className="col-md-12 mx-0">
-                  <ul id="progressbar">
-                    <li className={"active"} id="personal">
-                      <strong>Personal Details</strong>
-                    </li>
-                    <li
-                      className={steps.includes(2) ? "active" : ""}
-                      id="account"
-                    >
-                      <strong>Employer Details</strong>
-                    </li>
-                    <li
-                      className={steps.includes(3) ? "active" : ""}
-                      id="payment"
-                    >
-                      <strong>Monthly Contribution</strong>
-                    </li>
-                    <li
-                      className={steps.includes(4) ? "active" : ""}
-                      id="confirm"
-                    >
-                      <strong>Next Of Kin</strong>
-                    </li>
-                  </ul>
+                <Row>
+                  <div className="col-md-12 mx-0">
+                    <ul id="progressbar">
+                      <li className={"active"} id="personal">
+                        <strong>Personal Details</strong>
+                      </li>
+                      <li
+                        className={steps.includes(2) ? "active" : ""}
+                        id="account"
+                      >
+                        <strong>Employer Details</strong>
+                      </li>
+                      <li
+                        className={steps.includes(3) ? "active" : ""}
+                        id="confirm"
+                      >
+                        <strong>Next Of Kin</strong>
+                      </li>
+                      <li
+                        className={steps.includes(4) ? "active" : ""}
+                        id="payment"
+                      >
+                        <strong></strong>
+                      </li>
+                    </ul>
 
-                  <div id="msform">
-                    {renderForm(
-                      formstep,
-                      passportURL,
-                      signatureURL,
-                      error,
-                      this.props.errors,
-                      terms,
-                      disableButton,
-                      this.handleChange,
-                      this.handleSubmit,
-                      this.nextStep,
-                      this.prevStep,
-                      this.state
-                    )}
+                    <div id="msform">
+                      {renderForm(
+                        formstep,
+                        passportURL,
+                        signatureURL,
+                        error,
+                        this.props.errors,
+                        terms,
+                        disableButton,
+                        this.handleChange,
+                        this.handleSubmit,
+                        this.nextStep,
+                        this.prevStep,
+                        this.state
+                      )}
+                    </div>
+                    <ToastContainer position="top-center" />
                   </div>
-                  <ToastContainer position="top-center" />
-                </div>
-              </Row>
-            </Card>
+                </Row>
+              </Card>
+            </div>
           </div>
-        </div>
+        )}
       </ContentWrapper>
     );
   }
@@ -554,12 +516,10 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return {};
-  //   return {
-  //     // signup: (formdata) => dispatch(signUp(formdata)),
-  //     // clearNotifications: () => dispatch(clearNotifications()),
-  //     // storeformData: (formdata) => dispatch(storeformData(formdata)),
-  //   };
+  return {
+    register: (formdata) => dispatch(registerRSA(formdata)),
+    clearNotifications: () => dispatch(clearNotifications()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterRsa);

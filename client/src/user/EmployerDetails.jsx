@@ -91,11 +91,23 @@ function EmployerDetails(props) {
           label="Current Grade Level"
           type="text"
           name="gradeLevel"
-          value=""
+          value={state.gradeLevel}
           onChange={props.handleChange}
           placeholder="enter current grade level"
           error={props.error.gradeLevel}
           className="col-md-6"
+        />{" "}
+      </div>
+      <div className=" row px-3 mt-3">
+        <InputField
+          label="Salary Structure"
+          type="text"
+          name="salaryStructure"
+          value={state.salaryStructure}
+          onChange={props.handleChange}
+          placeholder="CONTISS,  COMPSS, HATISS ETC"
+          error={props.error.salaryStructure}
+          className="col-md-12"
         />{" "}
       </div>
 

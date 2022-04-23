@@ -3,7 +3,7 @@ import { NavItem } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 
 function UserPannel(props) {
-  const { user } = props.user;
+  const { user } = props?.user;
   return (
     <NavLink id="RouterNavLink" to="/dashboard/profile">
       <div className="user-panel mt-3 pb-3 mb-3 d-flex">

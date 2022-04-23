@@ -1,6 +1,6 @@
 const config = {
   headers: {
-    Content_Type: "application/json",
+    Content_Type: "multipart/form-data",
   },
 };
 

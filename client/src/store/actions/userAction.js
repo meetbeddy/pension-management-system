@@ -1,9 +1,13 @@
 import axios from "axios";
-import { baseUrl } from "../config";
+import { baseUrl, getConfig } from "../config";
 
-export const submitCase = (data) => async (dispatch, getState) => {
+export const registerRSA = (data) => async (dispatch, getState) => {
   try {
-    const res = await axios.post(`${baseUrl}/api/user/submitcase`, data);
+    const res = await axios.post(
+      `${baseUrl}/api/user/register-rsa`,
+      data,
+      getConfig(getState)
+    );
 
     dispatch({ type: "GET_SUCCESS_MSG", payload: res.data });
   } catch (err) {

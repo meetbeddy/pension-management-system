@@ -1,8 +1,5 @@
 const initialState = {
   user: JSON.parse(localStorage.getItem("profile")),
-
-  errors: {},
-  success: {},
 };
 const authReducer = (state = initialState, action) => {
   switch (action.type) {

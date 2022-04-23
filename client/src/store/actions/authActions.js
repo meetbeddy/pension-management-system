@@ -14,8 +14,10 @@ export const signIn = (formdata) => async (dispatch) => {
       config
     );
 
+    console.log(res.data);
     dispatch({ type: "AUTH_SUCCESS", payload: res.data });
   } catch (error) {
+    console.log(error.response);
     dispatch({ type: "GET_ERROR_MSG", payload: error?.response?.data });
   }
 };

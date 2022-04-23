@@ -1,14 +1,17 @@
 import React from "react";
-import { Route } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Route, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../../store/actions/authActions";
-import LandingPage from "../../landing/Index";
 
 function AppHeader() {
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
+  React.useEffect(() => {
+    if (!user) redirect();
+  }, [user]);
 
   const redirect = () => {
-    return <Route path="/" element={LandingPage} />;
+    return <Route path="*" element={<Navigate replace to="/" />} />;
   };
   return (
     <nav className="main-header navbar navbar-expand navbar-white navbar-light">

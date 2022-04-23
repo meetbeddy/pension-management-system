@@ -31,8 +31,8 @@ function Auth(props) {
   };
 
   React.useEffect(() => {
-    if (notification.errors.message) {
-      const { message } = notification.errors;
+    if (notification?.errors?.message) {
+      const { message } = notification?.errors;
       toast.error(message);
       return dispatch(clearNotifications());
     }
@@ -74,7 +74,7 @@ function Auth(props) {
       }
     }
   };
-  console.log(props);
+
   if (props.user) {
     return (
       <Routes>

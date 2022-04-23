@@ -40,17 +40,9 @@ function PersonData(props) {
           onChange={handleChange}
         >
           <option> select your title</option>
-          <option value="Prof.">Prof </option>
-          <option value="Dr.">Dr.</option>
-          <option value="Sir">Sir</option>
-          <option value="Rev.">Rev</option>
-          <option value="Chief">Chief</option>
-          <option value="Alhaji">Alhaji</option>
           <option value="Mr.">Mr</option>
           <option value="Mrs.">Mrs</option>
           <option value="Miss">Miss</option>
-          <option value="Sir">Sir</option>
-          <option value="Lady">Lady</option>
           <option value="Others">Others</option>
         </Form.Control>
       </Form.Group>
