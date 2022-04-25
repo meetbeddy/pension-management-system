@@ -1,111 +1,87 @@
-// const mongoose = require("mongoose");
-// mongoose.Promise = global.Promise;
-// const User = require("../models/User");
-// const Admin = require("../models/Admin");
-// const LastMemberId = require("../models/LastMemberId");
-// const IncreaseSavingDetail = require("../models/IncreaseSavingDetail");
-// const DecreaseSavingDetail = require("../models/DecreaseSavingDetail");
-// const bcrypt = require("bcrypt");
-// const jwt = require("jsonwebtoken");
-// const Referal = require("../models/Referal");
-// const sendEmail = require("../services/mailgun").memberConfirmation;
-// const InitialSaving = require("../models/InitialSavingDetail");
-// const sendInvite = require("../services/mailgun").adminInvite;
-// const sendReciept = require("../services/mailgun").recieptAcknowledgement;
-// const addToList = require("../services/mailgun").addMemberToMailList;
-// const messageAll = require("../services/mailgun").messageAllMembers;
-// const Product = require("../models/Products");
-// const CommodityReq = require("../models/CommodityRequest");
-// const crypto = require("crypto");
-// const multer = require("../middleware/multer");
-// const cloudinary = require("cloudinary");
+const mongoose = require("mongoose");
+const User = require("../models/User");
+const Admin = require("../models/Admin");
+const bcrypt = require("bcrypt");
 
-// exports.getReferrals = async (req, res) => {
-//   try {
-//     const referrals = await Referal.find()
-//       .populate({
-//         path: " userId",
-//         model: "User",
-//       })
-//       .populate([
-//         {
-//           path: "referedUsers",
-//           model: "User",
-//         },
-//       ]);
+exports.adminSignUp = async (req, res) => {
+  const { email, password, fullName } = req.body;
 
-//     res.status(200).json({ referrals });
-//   } catch (err) {
-//     res
-//       .status(500)
-//       .json({ message: "something went wrong", error: err.message });
-//   }
-// };
-// exports.messageAll = async (req, res) => {
-//   try {
-//     messageAll(req.body.subject, req.body.message);
-//     res.status(200).json({ message: "sent successfully" });
-//   } catch (err) {
-//     res
-//       .status(500)
-//       .json({ message: "something went wrong", error: err.message });
-//   }
-// };
+  try {
+    const existingUser = await Admin.findOne({ email: email });
+
+    if (existingUser) {
+      return res.json({ message: "user already exist" });
+    }
+
+    const hashedpassword = await bcrypt.hash(password, 12);
+    const user = await Admin.create({
+      email,
+      password: hashedpassword,
+      name: fullName,
+    });
+
+    res.status(200).json({ message: "successfully created admin", user });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
 // /*@route GET
 //  @desc confirm user
 //  @access private*/
 
-// exports.confirmUser = async (req, res) => {
-//   const id = req.params.id;
+exports.confirmUser = async (req, res) => {
+  const id = req.params.id;
 
-//   try {
-//     if (!req.user.accessLevel)
-//       return res.status(401).json({
-//         message: "you dont have the permission to carry out this action",
-//       });
+  try {
+    if (!req.user.accessLevel)
+      return res.status(401).json({
+        message: "you dont have the permission to carry out this action",
+      });
 
-//     let user = await User.findOne({
-//       _id: id,
-//     });
+    let user = await User.findOne({
+      _id: id,
+    });
 
-//     if (user.confirmed)
-//       return res.status(400).json({ message: "user is already confirmed" });
+    if (user.confirmed)
+      return res.status(400).json({ message: "user is already confirmed" });
 
-//     let recentId = await LastMemberId.findOne();
+    let recentId = await LastMemberId.findOne();
 
-//     if (!recentId) {
-//       recentId = await new LastMemberId({
-//         userId: user._id,
-//       }).save();
-//     }
+    if (!recentId) {
+      recentId = await new LastMemberId({
+        userId: user._id,
+      }).save();
+    }
 
-//     const generatedMemberId = await generateMemberId(recentId.memberId);
+    const generatedMemberId = await generateMemberId(recentId.memberId);
 
-//     const lastGeneratedMemberId = generatedMemberId.slice(-6);
+    const lastGeneratedMemberId = generatedMemberId.slice(-6);
 
-//     recentId.memberId = lastGeneratedMemberId;
-//     recentId.userId = user._id;
-//     recentId.save();
-//     user.confirmed = true;
-//     user.confirmedBy = req.user.name;
-//     user.memberId = generatedMemberId;
-//     user.save();
-//     const person = {
-//       name: user.name,
-//       subscribed: true,
-//       address: user.email,
-//     };
-//     addToList.members().create(person, function (error, data) {
-//       console.log(data);
-//     });
-//     sendEmail(user.email, user.name, user.memberId);
-//     res.status(200).json({ message: "user confirmed successfully" });
-//   } catch (err) {
-//     res
-//       .status(500)
-//       .json({ message: "something went wrong", error: err.message });
-//   }
-// };
+    recentId.memberId = lastGeneratedMemberId;
+    recentId.userId = user._id;
+    recentId.save();
+    user.confirmed = true;
+    user.confirmedBy = req.user.name;
+    user.memberId = generatedMemberId;
+    user.save();
+    const person = {
+      name: user.name,
+      subscribed: true,
+      address: user.email,
+    };
+    addToList.members().create(person, function (error, data) {
+      console.log(data);
+    });
+    sendEmail(user.email, user.name, user.memberId);
+    res.status(200).json({ message: "user confirmed successfully" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
 
 // /*@route GET
 //  @desc get confirmed user

@@ -2,9 +2,9 @@ import React from "react";
 
 function Services() {
   return (
-    <section id="services" class="services section-bg">
-      <div class="container" data-aos="fade-up">
-        <div class="section-title">
+    <section id="services" className="services section-bg">
+      <div className="container" data-aos="fade-up">
+        <div className="section-title">
           <h2>Services</h2>
           <p>
             Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex
@@ -14,15 +14,15 @@ function Services() {
           </p>
         </div>
 
-        <div class="row">
+        <div className="row">
           <div
-            class="col-xl-3 col-md-6 d-flex align-items-stretch"
+            className="col-xl-3 col-md-6 d-flex align-items-stretch"
             data-aos="zoom-in"
             data-aos-delay="100"
           >
-            <div class="icon-box">
-              <div class="icon">
-                <i class="bx bxl-dribbble"></i>
+            <div className="icon-box">
+              <div className="icon">
+                <i className="bx bxl-dribbble"></i>
               </div>
               <h4>
                 <a href="">Lorem Ipsum</a>
@@ -35,13 +35,13 @@ function Services() {
           </div>
 
           <div
-            class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
+            className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0"
             data-aos="zoom-in"
             data-aos-delay="200"
           >
-            <div class="icon-box">
-              <div class="icon">
-                <i class="bx bx-file"></i>
+            <div className="icon-box">
+              <div className="icon">
+                <i className="bx bx-file"></i>
               </div>
               <h4>
                 <a href="">Sed ut perspici</a>
@@ -54,13 +54,13 @@ function Services() {
           </div>
 
           <div
-            class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0"
+            className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0"
             data-aos="zoom-in"
             data-aos-delay="300"
           >
-            <div class="icon-box">
-              <div class="icon">
-                <i class="bx bx-tachometer"></i>
+            <div className="icon-box">
+              <div className="icon">
+                <i className="bx bx-tachometer"></i>
               </div>
               <h4>
                 <a href="">Magni Dolores</a>
@@ -73,13 +73,13 @@ function Services() {
           </div>
 
           <div
-            class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0"
+            className="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0"
             data-aos="zoom-in"
             data-aos-delay="400"
           >
-            <div class="icon-box">
-              <div class="icon">
-                <i class="bx bx-layer"></i>
+            <div className="icon-box">
+              <div className="icon">
+                <i className="bx bx-layer"></i>
               </div>
               <h4>
                 <a href="">Nemo Enim</a>

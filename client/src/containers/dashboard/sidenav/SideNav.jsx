@@ -4,6 +4,7 @@ import UserPannel from "./UserPannel";
 
 function SideNav(props) {
   const { user } = props;
+
   return (
     <aside
       className="main-sidebar sidebar-dark-primary elevation-4"

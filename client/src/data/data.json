@@ -41,14 +41,14 @@
 
     {
       "id": 17,
-      "name": "Manage Employees/Pensioners",
+      "name": "Manage Employees",
       "icon": "far fa-circle nav-icon",
       "type": "multiple",
       "admin": true,
       "inner": [
         {
           "id": 1,
-          "name": "add new employee ",
+          "name": "add new employee",
           "icon": "far fa-circle nav-icon",
           "path": "/dashboard/addemployee"
         },
@@ -59,73 +59,6 @@
           "icon": "far fa-circle nav-icon"
         }
       ]
-    },
-
-    {
-      "id": 7,
-      "name": "New instructions",
-      "icon": "far fa-circle nav-icon",
-      "type": "multiple",
-      "admin": true,
-      "inner": [
-        {
-          "id": 1,
-          "name": "Initial Savings & share capital ",
-          "icon": "far fa-circle nav-icon",
-          "path": "/dashboard/instructions/initial"
-        },
-        {
-          "id": 2,
-          "name": "Increase saving and share capital",
-          "path": "/dashboard/instructions/increment",
-          "icon": "far fa-circle nav-icon"
-        },
-        {
-          "id": 3,
-          "name": "Decrease saving and share capital",
-          "path": "/dashboard/instructions/decrement",
-          "icon": "far fa-circle nav-icon"
-        },
-        {
-          "id": 4,
-          "name": "Direct bank Transfer request",
-          "path": "dashboard/instructions/banktranfer",
-          "icon": "far fa-circle nav-icon"
-        }
-      ]
-    },
-
-    {
-      "id": 9,
-      "name": "Member Register",
-      "icon": "far fa-circle nav-icon",
-      "path": "/dashboard/member-register",
-      "type": "single",
-      "admin": true
-    },
-    {
-      "id": 10,
-      "name": "Summary Table",
-      "icon": "far fa-circle nav-icon",
-      "path": "/dashboard/summaryreport",
-      "type": "single",
-      "admin": true
-    },
-    {
-      "id": 11,
-      "name": "Referral Table",
-      "icon": "far fa-circle nav-icon",
-      "path": "/dashboard/referralreport",
-      "type": "single",
-      "admin": true
-    },
-    {
-      "id": 12,
-      "name": "Compose Message",
-      "icon": "far fa-circle nav-icon",
-      "path": "/dashboard/message",
-      "type": "single",
-      "admin": true
     }
   ],
 

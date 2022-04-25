@@ -105,15 +105,15 @@ function Contact() {
         </div>
       </section>
       <footer id="footer">
-        <div class="container footer-bottom clearfix">
-          <div class="copyright">
+        <div className="container footer-bottom clearfix">
+          <div className="copyright">
             &copy; Copyright{" "}
             <strong>
               <span>Arsha</span>
             </strong>
             . All Rights Reserved
           </div>
-          <div class="credits">
+          <div className="credits">
             Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
           </div>
         </div>

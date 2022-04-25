@@ -3,26 +3,30 @@ import AppHeader from "./appHeader/appHeader";
 import SideNav from "./sidenav/SideNav";
 import JsonData from "../../data/data.json";
 import ControlSIdebar from "./ControlSIdebar";
-import { Routes, Route, Navigate } from "react-router";
+import { Redirect } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { getProfile } from "../../store/actions/authActions";
 
 function Dashboard(props) {
   const [navigationData, setNagivationData] = useState({});
+  const dispatch = useDispatch();
+  const userProfile = useSelector((state) => state.userProfile.userProfile);
+
+  useEffect(() => {
+    dispatch(getProfile());
+  }, [dispatch]);
 
   useEffect(() => {
     setNagivationData(JsonData);
   }, []);
 
   if (!props.user) {
-    return (
-      <Routes>
-        <Route path="*" element={<Navigate replace to="/auth/signin" />} />
-      </Routes>
-    );
+    return <Redirect to="/" />;
   }
   return (
     <>
       <AppHeader {...props} />
-      <SideNav {...props} data={navigationData.Dashboard} />
+      <SideNav user={userProfile} data={navigationData.Dashboard} />
       <ControlSIdebar />
       {props.children}
     </>

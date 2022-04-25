@@ -5,7 +5,7 @@ import { signIn, signUp } from "../../store/actions/authActions";
 import { clearNotifications } from "../../store/actions/notificationsActions";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { Routes, Route, Navigate } from "react-router";
+import { Redirect } from "react-router-dom";
 import "./login.css";
 
 function Auth(props) {
@@ -25,11 +25,13 @@ function Auth(props) {
   React.useEffect(() => {
     setAuthType(props.type);
   }, [props.type]);
+
   const dispatch = useDispatch();
   const handleChange = (e) => {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
+  console.log("user");
   React.useEffect(() => {
     if (notification?.errors?.message) {
       const { message } = notification?.errors;
@@ -76,11 +78,7 @@ function Auth(props) {
   };
 
   if (props.user) {
-    return (
-      <Routes>
-        <Route path="*" element={<Navigate replace to="/dashboard" />} />
-      </Routes>
-    );
+    return <Redirect to="/dashboard" />;
   }
 
   return (

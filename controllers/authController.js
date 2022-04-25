@@ -3,6 +3,7 @@ mongoose.Promise = global.Promise;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
+const Admin = require("../models/Admin");
 
 /*@route POST
  @desc sign in for user
@@ -12,8 +13,12 @@ exports.signIn = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    const existingUser = await User.findOne({ email: email });
-
+    let existingUser;
+    if (!email === "admin@admin.com") {
+      existingUser = await User.findOne({ email: email });
+    } else {
+      existingUser = await Admin.findOne({ email: email });
+    }
     if (!existingUser)
       return res.status(404).json({ message: "user does not exist" });
     const passwordCorrect = await bcrypt.compare(
@@ -27,11 +32,17 @@ exports.signIn = async (req, res) => {
         email: existingUser.email,
         accessLevel: existingUser.accessLevel,
       },
-      process.env.TOKEN_SECRET
+      process.env.TOKEN_SECRET,
+      {
+        expiresIn: "2h",
+      }
     );
-    res.status(200).json({ user: existingUser, token });
+
+    res.status(200).json({ token });
   } catch (error) {
-    res.status(500).json({ message: "something went wrong" });
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: error.message });
   }
 };
 
@@ -75,6 +86,22 @@ exports.signUp = async (req, res) => {
   }
 };
 
+exports.getProfile = async (req, res) => {
+  try {
+    let user;
+    if (req.user.email === "admin@admin.com") {
+      user = await Admin.findOne({ email: req.user.email });
+    } else {
+      user = await User.findOne({ email: req.user.email });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
 // exports.updateUserProfile = async (req, res) => {
 //   try {
 //     const user = await User.findOne({ _id: req.body.id });

@@ -23,6 +23,7 @@ const userSchema = new Schema(
     password: { type: String, required: true },
     confirmed: { type: Boolean, default: false },
     nextOfKin: { type: Schema.Types.ObjectId, ref: "Nok" },
+    contributions: { type: Schema.Types.ObjectId, ref: "Contribution" },
     employmentDetail: {
       type: Schema.Types.ObjectId,
       ref: "Employment",

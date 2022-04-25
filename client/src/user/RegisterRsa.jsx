@@ -304,7 +304,6 @@ export class RegisterRsa extends Component {
       nin,
       homeAddress,
       signature,
-
       passport,
 
       workAddress,
@@ -445,7 +444,7 @@ export class RegisterRsa extends Component {
       this.state;
     return (
       <ContentWrapper>
-        {!this.state.showSuccess ? (
+        {this.state.showSuccess ? (
           <SubmitSuccess />
         ) : (
           <div id="grad1" className="justify-content-center ">

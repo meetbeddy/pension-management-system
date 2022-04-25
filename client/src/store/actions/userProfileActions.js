@@ -5,10 +5,7 @@ export const fetchUserProfile = (user) => async (dispatch, getState) => {
   try {
     let res;
     if (user.user.accessLevel === 1) {
-      res = await axios.get(
-        `${baseUrl}/user/getuser/${user.user._id}`,
-        getConfig(getState)
-      );
+      res = await axios.get(`${baseUrl}/user/getuser`, getConfig(getState));
       dispatch({ type: "FETCH_USER", payload: res?.data });
     } else {
       res = await axios.get(

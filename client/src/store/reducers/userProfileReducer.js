@@ -10,7 +10,7 @@ const userProfileReducer = (state = initState, action) => {
     case "FETCH_USER":
       return {
         ...state,
-        profile: action?.payload,
+        userProfile: action?.payload,
       };
 
     default:
