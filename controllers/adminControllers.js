@@ -1,7 +1,11 @@
 const mongoose = require("mongoose");
 const User = require("../models/User");
 const Admin = require("../models/Admin");
+const Investment = require("../models/Investment");
+const Funds = require("../models/Funds");
+const Balance = require("../models/Balances");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 exports.adminSignUp = async (req, res) => {
   const { email, password, fullName } = req.body;
@@ -27,12 +31,53 @@ exports.adminSignUp = async (req, res) => {
       .json({ message: "something went wrong", error: err.message });
   }
 };
+exports.fetchEmployees = async (req, res) => {
+  try {
+    const employees = await User.find({ confirmed: true })
+      .populate({
+        path: "balance",
+        model: "Balance",
+      })
+      .populate({
+        path: "nextOfKin",
+        model: "Nok",
+      })
+      .populate({
+        path: "employmentDetail",
+        model: "Employment",
+      });
+
+    res.status(200).json(employees);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
+exports.fetchRsaRequest = async (req, res) => {
+  try {
+    const requests = await User.find({ confirmed: false })
+      .populate({
+        path: "nextOfKin",
+        model: "Nok",
+      })
+      .populate({
+        path: "employmentDetail",
+        model: "Employment",
+      });
+    res.status(200).json(requests);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
 // /*@route GET
 //  @desc confirm user
 //  @access private*/
 
 exports.confirmUser = async (req, res) => {
-  const id = req.params.id;
+  const { id } = req.body;
 
   try {
     if (!req.user.accessLevel)
@@ -46,35 +91,15 @@ exports.confirmUser = async (req, res) => {
 
     if (user.confirmed)
       return res.status(400).json({ message: "user is already confirmed" });
+    let pen = await generatePen();
 
-    let recentId = await LastMemberId.findOne();
+    const userBalance = await new Balance().save();
 
-    if (!recentId) {
-      recentId = await new LastMemberId({
-        userId: user._id,
-      }).save();
-    }
-
-    const generatedMemberId = await generateMemberId(recentId.memberId);
-
-    const lastGeneratedMemberId = generatedMemberId.slice(-6);
-
-    recentId.memberId = lastGeneratedMemberId;
-    recentId.userId = user._id;
-    recentId.save();
+    user.balance = userBalance._id;
+    user.rsaPin = pen;
     user.confirmed = true;
-    user.confirmedBy = req.user.name;
-    user.memberId = generatedMemberId;
-    user.save();
-    const person = {
-      name: user.name,
-      subscribed: true,
-      address: user.email,
-    };
-    addToList.members().create(person, function (error, data) {
-      console.log(data);
-    });
-    sendEmail(user.email, user.name, user.memberId);
+    await user.save();
+
     res.status(200).json({ message: "user confirmed successfully" });
   } catch (err) {
     res
@@ -83,6 +108,54 @@ exports.confirmUser = async (req, res) => {
   }
 };
 
+generatePen = async (lastid) => {
+  let gen = crypto.randomInt(100000000000, 1000000000000);
+  let pen = `PEN${gen}`;
+  let existingPen = await User.findOne({ rsaPin: pen });
+  if (existingPen) {
+    generatePen();
+  }
+  return pen;
+};
+
+exports.addInvestment = async (req, res) => {
+  const { investmentType, investmentAmount, fundSource, description } =
+    req.body;
+  try {
+    await Investment.create({
+      investmentType,
+      investmentAmount,
+      fundSource,
+      description,
+    });
+
+    res.status(200).json({ message: "investment added" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
+exports.addFund = async (req, res) => {
+  try {
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
+
+exports.fetchInvestments = async (req, res) => {
+  try {
+    const investments = await Investment.find({});
+
+    res.status(200).json(investments);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
 // /*@route GET
 //  @desc get confirmed user
 //  @access public*/
@@ -340,19 +413,6 @@ exports.confirmUser = async (req, res) => {
 //   }
 // };
 // //LMCS/month/year/sixdigitsequence
-// generateMemberId = (lastid) => {
-//   let todayDate = new Date();
-//   let month = todayDate.getMonth() + 1;
-//   let year = todayDate.getFullYear();
-//   let num = parseInt(lastid) + 1;
-
-//   let sequence = num + "";
-//   while (sequence.length < 6) sequence = "0" + sequence;
-
-//   let id = `LMCS/${month}/${year}/${sequence}`;
-
-//   return id;
-// };
 
 // exports.addProduct = async (req, res) => {
 //   const { productName, variation, price, productImage, description } = req.body;

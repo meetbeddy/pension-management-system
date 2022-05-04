@@ -1,20 +1,27 @@
 const initialState = {
-  cases: [],
-  contacts: [],
+  rsaRequests: [],
+  investments: [],
+  employees: [],
 };
 
 const adminReducer = (state = initialState, action) => {
   switch (action.type) {
-    case "GET_CASES":
+    case "RSA_REQUEST":
       return {
         ...state,
-        cases: action?.payload,
+        rsaRequests: action?.payload,
       };
-    case "GET_CONTACTS":
+    case "FETCH_INVESTMENTS":
       return {
         ...state,
-        contacts: action.payload,
+        investments: action?.payload,
       };
+    case "FETCH_EMPLOYEES":
+      return {
+        ...state,
+        employees: action?.payload,
+      };
+
     default:
       return state;
   }

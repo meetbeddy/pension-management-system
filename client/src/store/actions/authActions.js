@@ -9,10 +9,9 @@ const config = {
 export const signIn = (formdata) => async (dispatch) => {
   try {
     const res = await axios.post(`${baseUrl}/api/user/signin`, formdata);
-    console.log(res.data);
+
     dispatch({ type: "AUTH_SUCCESS", payload: res.data });
   } catch (error) {
-    console.log(error);
     dispatch({ type: "GET_ERROR_MSG", payload: error?.response?.data });
   }
 };

@@ -2,18 +2,20 @@ import React from "react";
 import LoginRequired from "./LoginRequired";
 import AccessDenied from "./AccessDenied";
 import { Route } from "react-router-dom";
-import Dashboard from "../../containers/dashboard/Dashboard";
 
-const renderFunction = (props, Component, user, RequiredAccessLevel) => {
+const renderFunction = (
+  props,
+  Component,
+  user,
+  accessLevel,
+  RequiredAccessLevel
+) => {
   switch (user) {
     case null:
       return <LoginRequired />;
 
     default:
-      if (
-        !RequiredAccessLevel ||
-        user?.user?.accessLevel >= RequiredAccessLevel
-      )
+      if (!RequiredAccessLevel || accessLevel >= RequiredAccessLevel)
         return <Component {...props} />;
       else return <AccessDenied />;
   }
@@ -21,6 +23,7 @@ const renderFunction = (props, Component, user, RequiredAccessLevel) => {
 
 const PrivateRoute = ({
   user,
+  accessLevel,
   RequiredAccessLevel,
   component: Component,
   ...rest
@@ -29,7 +32,7 @@ const PrivateRoute = ({
     <Route
       {...rest}
       render={(props) =>
-        renderFunction(props, Component, user, RequiredAccessLevel)
+        renderFunction(props, Component, user, accessLevel, RequiredAccessLevel)
       }
     />
   );

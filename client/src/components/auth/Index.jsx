@@ -31,7 +31,6 @@ function Auth(props) {
     setInputValue({ ...inputValue, [e.target.name]: e.target.value });
   };
 
-  console.log("user");
   React.useEffect(() => {
     if (notification?.errors?.message) {
       const { message } = notification?.errors;

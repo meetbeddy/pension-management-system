@@ -11,7 +11,7 @@
 
     {
       "id": 3,
-      "name": "RSA  ",
+      "name": "RSA",
       "icon": "far fa-circle nav-icon",
       "type": "multiple",
       "admin": false,
@@ -22,9 +22,10 @@
           "path": "/dashboard/rsa/register",
           "icon": "far fa-circle nav-icon"
         },
+
         {
           "id": 2,
-          "name": "Bio",
+          "name": "RSA Info",
           "path": "/dashboard/rsa/bio",
           "icon": "far fa-circle nav-icon"
         }
@@ -56,6 +57,54 @@
           "id": 2,
           "name": "RSA requests",
           "path": "/dashboard/rsa-request",
+          "icon": "far fa-circle nav-icon"
+        },
+        {
+          "id": 2,
+          "name": "View Employees",
+          "path": "/dashboard/employees",
+          "icon": "far fa-circle nav-icon"
+        }
+      ]
+    },
+    {
+      "id": 1788,
+      "name": "Manage Investment",
+      "icon": "far fa-circle nav-icon",
+      "type": "multiple",
+      "admin": true,
+      "inner": [
+        {
+          "id": 2,
+          "name": "add invesment",
+          "path": "/dashboard/add-investment",
+          "icon": "far fa-circle nav-icon"
+        },
+        {
+          "id": 1,
+          "name": "view investment",
+          "icon": "far fa-circle nav-icon",
+          "path": "/dashboard/view-investment"
+        }
+      ]
+    },
+    {
+      "id": 174,
+      "name": "Manage Funds",
+      "icon": "far fa-circle nav-icon",
+      "type": "multiple",
+      "admin": true,
+      "inner": [
+        {
+          "id": 1,
+          "name": "add funds",
+          "icon": "far fa-circle nav-icon",
+          "path": "/dashboard/add-funds"
+        },
+        {
+          "id": 2,
+          "name": "view funds",
+          "path": "/dashboard/view-funds",
           "icon": "far fa-circle nav-icon"
         }
       ]

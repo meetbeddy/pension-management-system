@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const contributionHistory = new Schema({
-  month: String,
-  amount: Number,
-});
+const contributionSchema = new Schema(
+  {
+    month: String,
+    amount: { type: Number, required: true },
+  },
+  { timestamps: true }
+);
 module.exports = mongoose.model("Contribution", contributionSchema);

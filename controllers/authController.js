@@ -14,11 +14,12 @@ exports.signIn = async (req, res) => {
 
   try {
     let existingUser;
-    if (!email === "admin@admin.com") {
-      existingUser = await User.findOne({ email: email });
-    } else {
+    if (email === "admin@admin.com") {
       existingUser = await Admin.findOne({ email: email });
+    } else {
+      existingUser = await User.findOne({ email: email });
     }
+
     if (!existingUser)
       return res.status(404).json({ message: "user does not exist" });
     const passwordCorrect = await bcrypt.compare(
@@ -32,10 +33,10 @@ exports.signIn = async (req, res) => {
         email: existingUser.email,
         accessLevel: existingUser.accessLevel,
       },
-      process.env.TOKEN_SECRET,
-      {
-        expiresIn: "2h",
-      }
+      process.env.TOKEN_SECRET
+      // {
+      //   expiresIn: "2h",
+      //
     );
 
     res.status(200).json({ token });
@@ -67,10 +68,10 @@ exports.signUp = async (req, res) => {
 
     const token = jwt.sign(
       { email: email, accessLevel: 1 },
-      process.env.TOKEN_SECRET,
-      {
-        expiresIn: "2h",
-      }
+      process.env.TOKEN_SECRET
+      // {
+      //   expiresIn: "2h",
+      // }
     );
     const user = await User.create({
       name: firstName + " " + lastName,
@@ -92,7 +93,15 @@ exports.getProfile = async (req, res) => {
     if (req.user.email === "admin@admin.com") {
       user = await Admin.findOne({ email: req.user.email });
     } else {
-      user = await User.findOne({ email: req.user.email });
+      user = await User.findOne({ email: req.user.email })
+        .populate({
+          path: "nextOfKin",
+          model: "Nok",
+        })
+        .populate({
+          path: "employmentDetail",
+          model: "Employment",
+        });
     }
 
     res.status(200).json(user);

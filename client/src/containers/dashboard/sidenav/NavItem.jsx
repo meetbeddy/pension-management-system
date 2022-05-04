@@ -4,10 +4,22 @@ import { Link } from "react-router-dom";
 function NavItems(props) {
   const { menus, user } = props;
 
+  let filterInner;
+
   const filteredMenus = menus?.filter((menu) => {
     if (user?.accessLevel === 3) {
       return menu.admin || menu.admin === "both";
     } else {
+      if (user?.rsaPin !== null && menu.name === "RSA") {
+        filterInner = menu?.inner?.filter((inner) => {
+          return inner?.name === "RSA Info";
+        });
+      } else if (user?.rsaPin === null && menu.name === "RSA") {
+        filterInner = menu?.inner?.filter(
+          (inner) => inner?.name === "Register RSA"
+        );
+      }
+
       return !menu.admin || menu.admin === "both";
     }
   });
@@ -37,16 +49,32 @@ function NavItems(props) {
                   <i className="right fas fa-angle-left"></i>
                 </p>
               </a>
-              <ul className="nav nav-treeview">
-                {menu?.inner.map((innermenu) => (
-                  <li key={innermenu.id * Math.random()} className="nav-item">
-                    <Link to={innermenu.path} className="nav-link">
-                      <i className={innermenu.icon}></i>
-                      <p>{innermenu.name}</p>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {menu.name !== "RSA" ? (
+                <ul className="nav nav-treeview">
+                  {menu?.inner.map((innermenu) => (
+                    <li key={innermenu.id * Math.random()} className="nav-item">
+                      <Link to={innermenu.path} className="nav-link">
+                        <i className={innermenu.icon}></i>
+                        <p>{innermenu.name}</p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul className="nav nav-treeview">
+                  {filterInner.map((innermenu) => (
+                    <li
+                      key={filterInner.id * Math.random()}
+                      className="nav-item"
+                    >
+                      <Link to={innermenu.path} className="nav-link">
+                        <i className={innermenu.icon}></i>
+                        <p>{innermenu.name}</p>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           )
         )}

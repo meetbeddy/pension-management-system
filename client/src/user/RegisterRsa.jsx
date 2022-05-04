@@ -122,8 +122,8 @@ export class RegisterRsa extends Component {
       return nextProps.clearNotifications();
     }
 
-    if (nextProps.success.message) {
-      const { message } = nextProps.success;
+    if (nextProps?.success?.message) {
+      const { message } = nextProps?.success;
       toast.success(message);
       this.setState({ showSuccess: true });
       return nextProps.clearNotifications();
