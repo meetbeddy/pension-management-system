@@ -20,6 +20,8 @@ import AddInvestment from "./admin/investment/AddInvestment";
 import ViewInvestments from "./admin/investment/ViewInvestments";
 import ViewEmployees from "./admin/employees/ViewEmployees";
 import EmployeeProfile from "./admin/employees/EmployeeProfile";
+import AddContributionPreview from "./admin/employees/AddContributionPreview";
+import ViewBalance from "./user/balance/ViewBalance";
 
 function App() {
   const user = useSelector((state) => state.auth.user);
@@ -61,6 +63,12 @@ function App() {
           <PrivateRoute
             exact
             user={user}
+            path="/dashboard/balances"
+            component={ViewBalance}
+          />
+          <PrivateRoute
+            exact
+            user={user}
             accessLevel={userProfile?.accessLevel}
             RequiredAccessLevel={MODERATOR_LEVEL}
             path="/dashboard/confirmuser/:id"
@@ -81,6 +89,22 @@ function App() {
             RequiredAccessLevel={MODERATOR_LEVEL}
             path="/dashboard/employee/:id"
             component={EmployeeProfile}
+          />
+          <PrivateRoute
+            exact
+            user={user}
+            accessLevel={userProfile?.accessLevel}
+            RequiredAccessLevel={MODERATOR_LEVEL}
+            path="/dashboard/addcontribution"
+            component={AddContributionPreview}
+          />
+          <PrivateRoute
+            exact
+            user={user}
+            accessLevel={userProfile?.accessLevel}
+            RequiredAccessLevel={MODERATOR_LEVEL}
+            path="/dashboard/add-investment"
+            component={AddInvestment}
           />
           <PrivateRoute
             exact

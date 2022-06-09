@@ -1,9 +1,11 @@
 const mongoose = require("mongoose");
+const { fundPrices } = require("../constants/fundPrices");
 const User = require("../models/User");
 const Admin = require("../models/Admin");
 const Investment = require("../models/Investment");
 const Funds = require("../models/Funds");
 const Balance = require("../models/Balances");
+const Contribution = require("../models/ContributionHistory");
 const bcrypt = require("bcrypt");
 const crypto = require("crypto");
 
@@ -145,6 +147,97 @@ exports.addFund = async (req, res) => {
   }
 };
 
+exports.addContribution = async (req, res) => {
+  const { month, amount, id, type } = req.body;
+
+  try {
+    const user = await User.findOne(
+      { rsaPin: id },
+      { signature: 0, passport: 0 }
+    );
+
+    let balance = await Balance.findById(user.balance);
+    let contributionHistory;
+
+    if (user.contributions) {
+      contributionHistory = await Contribution.findById(user.contributions);
+    } else {
+      contributionHistory = await new Contribution().save();
+      user.contributions = contributionHistory._id;
+      user.save();
+    }
+
+    let fundPrice = fundPrices[genRandom()];
+
+    let contributions = contributionHistory.contributions;
+
+    balance.units = Number(amount) / fundPrice;
+    balance.totalContributions = balance.totalContributions + Number(amount);
+    balance.currentBalance = balance.currentBalance + Number(amount);
+    await balance.save();
+
+    contributions.push({ month, amount, depositType: type, type });
+
+    contributionHistory.contributions = contributions;
+    await contributionHistory.save();
+
+    res.status(200).json({ message: "contribution added successfully" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
+
+const genRandom = () => {
+  const rand = Math.random() * (9 - 0);
+  return Math.floor(rand);
+};
+
+exports.addRoi = async (req, res) => {
+  const { id, amount, month, type, status } = req.body;
+
+  try {
+    const user = await User.findOne(
+      { rsaPin: id },
+      { signature: 0, passport: 0 }
+    );
+
+    let balance = await Balance.findById(user.balance);
+    let contributionHistory;
+
+    if (user.contributions) {
+      contributionHistory = await Contribution.findById(user.contributions);
+    } else {
+      contributionHistory = await new Contribution().save();
+      user.contributions = contributionHistory._id;
+      user.save();
+    }
+
+    let contributions = contributionHistory.contributions;
+
+    balance.currentBalance =
+      status === "gain"
+        ? balance.currentBalance + Number(amount)
+        : balance.currentBalance - Number(amount);
+    balance.gain_loss =
+      status === "gain"
+        ? balance.gain_loss + Number(amount)
+        : balance.gain_loss - Number(amount);
+    await balance.save();
+
+    contributions.push({ month, amount, depositType: type, status });
+
+    contributionHistory.contributions = contributions;
+    await contributionHistory.save();
+
+    res.status(200).json({ message: "ROI added successfully" });
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "something went wrong", error: err.message });
+  }
+};
 exports.fetchInvestments = async (req, res) => {
   try {
     const investments = await Investment.find({});

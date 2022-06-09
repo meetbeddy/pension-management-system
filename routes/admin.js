@@ -10,5 +10,7 @@ router.post("/addinvestment", auth, adminControllers.addInvestment);
 router.post("/addfund", auth, adminControllers.addFund);
 router.get("/fetchinvestments", auth, adminControllers.fetchInvestments);
 router.get("/fetchemployees", auth, adminControllers.fetchEmployees);
+router.post("/addcontribution", auth, adminControllers.addContribution);
+router.post("/addroi", auth, adminControllers.addRoi);
 
 module.exports = router;

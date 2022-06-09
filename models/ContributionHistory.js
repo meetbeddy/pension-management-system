@@ -3,8 +3,15 @@ const { Schema } = mongoose;
 
 const contributionSchema = new Schema(
   {
-    month: String,
-    amount: { type: Number, required: true },
+    contributions: [
+      {
+        month: String,
+        amount: String,
+        depositType: String,
+        status: String,
+      },
+      { _id: false },
+    ],
   },
   { timestamps: true }
 );

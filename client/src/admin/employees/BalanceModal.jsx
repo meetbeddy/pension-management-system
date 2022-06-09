@@ -56,10 +56,9 @@ function BalanceModal({ data, show, handleClose }) {
             <div className="nk-wgacc-group flex-lg-nowrap gx-4">
               <div className="nk-wgacc-sub">
                 <div className="nk-wgacc-amount">
-                  <div className="number">Transaction Type</div>
+                  <div className="number">Fund Type</div>
                 </div>
-                <div className="nk-wgacc-subtitle">Payment Gateway</div>
-                <div className="nk-wgacc-subtitle">Wallet address</div>
+                <div className="nk-wgacc-subtitle">Total Unit</div>
               </div>
               <div className="nk-wgacc-sub">
                 <span className="nk-wgacc-sign text-soft">
@@ -68,8 +67,9 @@ function BalanceModal({ data, show, handleClose }) {
                 <div className="nk-wgacc-amount">
                   <div className="number">{data?.transactionType}</div>
                 </div>
-                <div className="nk-wgacc-subtitle">{data?.gateway}</div>
-                <div className="nk-wgacc-subtitle">{data?.walletAddress}</div>
+                <div className="nk-wgacc-subtitle">
+                  {data?.balance.units.toFixed(2)}
+                </div>
               </div>
             </div>
           </div>
@@ -77,7 +77,7 @@ function BalanceModal({ data, show, handleClose }) {
       </Modal.Body>
       <Modal.Footer>
         <Button
-          className="btn btn-md btn-success"
+          className="btn btn-md btn-danger"
           id="confirm"
           onClick={(e) => {
             handleClose();

@@ -78,3 +78,29 @@ export const fetchEmployees = () => async (dispatch, getState) => {
     dispatch({ type: "GET_ERROR_MSG", payload: err.response?.data });
   }
 };
+
+export const addContribution = (data) => async (dispatch, getState) => {
+  try {
+    const res = await axios.post(
+      `${baseUrl}/api/admin/addcontribution`,
+      data,
+      getConfig(getState)
+    );
+    dispatch({ type: "GET_SUCCESS_MSG", payload: res.data });
+  } catch (err) {
+    dispatch({ type: "GET_ERROR_MSG", payload: err.response?.data });
+  }
+};
+
+export const addRoi = (data) => async (dispatch, getState) => {
+  try {
+    const res = await axios.post(
+      `${baseUrl}/api/admin/addroi`,
+      data,
+      getConfig(getState)
+    );
+    dispatch({ type: "GET_SUCCESS_MSG", payload: res.data });
+  } catch (err) {
+    dispatch({ type: "GET_ERROR_MSG", payload: err.response?.data });
+  }
+};

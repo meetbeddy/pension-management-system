@@ -8,6 +8,21 @@ import { Button } from "react-bootstrap";
 
 function EmployeeTable(props) {
   const { employees } = props;
+  const [filterData, setFilterData] = React.useState(employees);
+
+  const handleChange = (e) => {
+    let search = e.target.value.toLowerCase();
+    let result = [];
+
+    result = employees.filter((member) => {
+      let name = member.name.toLowerCase();
+      let pin = member.rsaPin.toLowerCase();
+
+      return name.search(search) !== -1 || pin.search(search) !== -1;
+    });
+
+    setFilterData(result);
+  };
 
   const openProfile = (cell, row, rowIndex, formatExtraData) => {
     return (
@@ -32,8 +47,8 @@ function EmployeeTable(props) {
       sort: true,
     },
     {
-      dataField: "email",
-      text: "Email",
+      dataField: "rsaPin",
+      text: "RSA PIN",
     },
     {
       dataField: "viewdetails",
@@ -84,15 +99,28 @@ function EmployeeTable(props) {
 
   return (
     <div style={{ padding: "20px" }}>
-      {employees.length > 0 ? (
+      <div style={{ margin: "5px", padding: "10px", maxWidth: "500px" }}>
+        <form className="search-form">
+          <div className="input-group">
+            <input
+              type="text"
+              name="search"
+              className="form-control"
+              placeholder="Enter name or RSA PIN to search"
+              onChange={handleChange}
+            />
+          </div>
+        </form>
+      </div>
+      {filterData.length > 0 ? (
         <BootstrapTable
           keyField="_id"
-          data={employees}
+          data={filterData}
           columns={columns}
           pagination={paginationFactory(options)}
         />
       ) : (
-        <h1>No New user at this time </h1>
+        <h1>employee not found </h1>
       )}
     </div>
   );

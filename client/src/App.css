@@ -207,3 +207,6 @@ select.list-dt:focus {
   width: 100%;
   object-fit: cover;
 }
+.cmn-section{
+  background-color: #616161;
+}

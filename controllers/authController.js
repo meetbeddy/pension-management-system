@@ -101,6 +101,14 @@ exports.getProfile = async (req, res) => {
         .populate({
           path: "employmentDetail",
           model: "Employment",
+        })
+        .populate({
+          path: "contributions",
+          model: "Contribution",
+        })
+        .populate({
+          path: "balance",
+          model: "Balance",
         });
     }
 

@@ -2,22 +2,39 @@ import React from "react";
 import { Row, Button } from "react-bootstrap";
 import ContentWrapper from "../../components/utilities/ContentWrapper";
 import ProfileDetailsTab from "../../components/utilities/ProfileDetailsTab";
+import { useSelector } from "react-redux";
 import BalanceModal from "./BalanceModal";
 import "./balance.css";
+import AddContribution from "./AddContribution";
 
 function EmployeeProfile(props) {
   const { state } = props.location;
-  const user = state;
 
-  console.log(user);
+  const employees = useSelector((state) => state.admin.employees);
+
+  const currentEmployee = employees.filter((employee) => {
+    return employee._id === state._id;
+  })[0];
+  const user = { state: currentEmployee };
 
   const [balanceShow, setBalanceShow] = React.useState(false);
+  const [formShow, setFormShow] = React.useState(false);
+  const [type, setType] = React.useState("");
   const handleShowModal = () => {
     setBalanceShow(true);
   };
 
   const handleCloseModal = () => {
     setBalanceShow(false);
+  };
+
+  const handleShowForm = (e) => {
+    setType(e.target.id);
+    setFormShow(true);
+  };
+
+  const handleCloseForm = () => {
+    setFormShow(false);
   };
 
   return (
@@ -31,7 +48,7 @@ function EmployeeProfile(props) {
                   <div>
                     <img
                       className="profile-user-img img-fluid img-circle"
-                      src={user?.passport}
+                      src={currentEmployee?.passport}
                       alt="User profile"
                       style={{
                         height: "100px",
@@ -43,7 +60,9 @@ function EmployeeProfile(props) {
                 </div>
 
                 {/* <h3 className="profile-username text-center"> </h3> */}
-                <p className="text-muted text-center">{user?.name}</p>
+                <p className="text-muted text-center">
+                  {currentEmployee?.name}
+                </p>
 
                 <Button
                   onClick={() => handleShowModal()}
@@ -52,21 +71,33 @@ function EmployeeProfile(props) {
                   <b>View Balance</b>
                 </Button>
                 <Button
-                  onClick={() => handleShowModal()}
+                  onClick={(e) => handleShowForm(e)}
                   className="btn btn-secondary btn-block"
                 >
-                  <b>Add Fund</b>
+                  <b id="contribution">Add Contribution</b>
+                </Button>
+                <Button
+                  onClick={(e) => handleShowForm(e)}
+                  className="btn btn-dark btn-block"
+                >
+                  <b id="roi">Add ROI</b>
                 </Button>
               </div>
             </div>
           </div>
-          <ProfileDetailsTab {...props} />
+          <ProfileDetailsTab user={user} />
         </Row>
       </section>
       <BalanceModal
         show={balanceShow}
         handleClose={handleCloseModal}
-        data={user}
+        data={currentEmployee}
+      />
+      <AddContribution
+        show={formShow}
+        close={handleCloseForm}
+        data={currentEmployee}
+        type={type}
       />
     </ContentWrapper>
   );
