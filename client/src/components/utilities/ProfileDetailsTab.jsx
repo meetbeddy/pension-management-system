@@ -1,7 +1,7 @@
 import React from "react";
 
 function ProfileDetailsTab(props) {
-  const { state } = props?.location || props.user;
+  const { state } = props?.location || props?.user;
 
   return state && state ? (
     <div className="col-md-9">

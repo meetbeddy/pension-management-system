@@ -10,20 +10,25 @@ import AddContribution from "./AddContribution";
 function EmployeeProfile(props) {
   const { state } = props.location;
 
-  const employees = useSelector((state) => state.admin.employees);
+  const employees = useSelector((state) => state?.admin.employees);
 
   const currentEmployee = employees.filter((employee) => {
     return employee._id === state._id;
   })[0];
-  const user = { state: currentEmployee };
+  // const user = { state: currentEmployee };
 
+  const [user, setUser] = React.useState({});
   const [balanceShow, setBalanceShow] = React.useState(false);
   const [formShow, setFormShow] = React.useState(false);
   const [type, setType] = React.useState("");
+
   const handleShowModal = () => {
     setBalanceShow(true);
   };
 
+  React.useEffect(() => {
+    setUser(state);
+  }, [state]);
   const handleCloseModal = () => {
     setBalanceShow(false);
   };
@@ -39,55 +44,59 @@ function EmployeeProfile(props) {
 
   return (
     <ContentWrapper>
-      <section>
-        <Row>
-          <div className="col-md-3">
-            <div className="card card-primary card-outline">
-              <div className="card-body box-profile">
-                <div className="text-center">
-                  <div>
-                    <img
-                      className="profile-user-img img-fluid img-circle"
-                      src={currentEmployee?.passport}
-                      alt="User profile"
-                      style={{
-                        height: "100px",
-                        width: "100px",
-                        objectFit: "cover",
-                      }}
-                    />
+      {currentEmployee ? (
+        <section>
+          <Row>
+            <div className="col-md-3">
+              <div className="card card-primary card-outline">
+                <div className="card-body box-profile">
+                  <div className="text-center">
+                    <div>
+                      <img
+                        className="profile-user-img img-fluid img-circle"
+                        src={currentEmployee?.passport}
+                        alt="User profile"
+                        style={{
+                          height: "100px",
+                          width: "100px",
+                          objectFit: "cover",
+                        }}
+                      />
+                    </div>
                   </div>
+
+                  {/* <h3 className="profile-username text-center"> </h3> */}
+                  <p className="text-muted text-center">
+                    {currentEmployee?.name}
+                  </p>
+
+                  <Button
+                    onClick={() => handleShowModal()}
+                    className="btn btn-primary btn-block"
+                  >
+                    <b>View Balance</b>
+                  </Button>
+                  <Button
+                    onClick={(e) => handleShowForm(e)}
+                    className="btn btn-secondary btn-block"
+                  >
+                    <b id="contribution">Add Contribution</b>
+                  </Button>
+                  <Button
+                    onClick={(e) => handleShowForm(e)}
+                    className="btn btn-dark btn-block"
+                  >
+                    <b id="roi">Add ROI</b>
+                  </Button>
                 </div>
-
-                {/* <h3 className="profile-username text-center"> </h3> */}
-                <p className="text-muted text-center">
-                  {currentEmployee?.name}
-                </p>
-
-                <Button
-                  onClick={() => handleShowModal()}
-                  className="btn btn-primary btn-block"
-                >
-                  <b>View Balance</b>
-                </Button>
-                <Button
-                  onClick={(e) => handleShowForm(e)}
-                  className="btn btn-secondary btn-block"
-                >
-                  <b id="contribution">Add Contribution</b>
-                </Button>
-                <Button
-                  onClick={(e) => handleShowForm(e)}
-                  className="btn btn-dark btn-block"
-                >
-                  <b id="roi">Add ROI</b>
-                </Button>
               </div>
             </div>
-          </div>
-          <ProfileDetailsTab user={user} />
-        </Row>
-      </section>
+            <ProfileDetailsTab user={user} />
+          </Row>
+        </section>
+      ) : (
+        <p> ...loading</p>
+      )}
       <BalanceModal
         show={balanceShow}
         handleClose={handleCloseModal}

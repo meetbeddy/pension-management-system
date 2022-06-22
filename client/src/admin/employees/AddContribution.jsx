@@ -7,7 +7,7 @@ function AddContribution(props) {
   const history = useHistory();
   const [amount, setAmount] = React.useState("");
   const [month, setMonth] = React.useState("");
-  const [status, setStatus] = React.useState("");
+  const [status, setStatus] = React.useState("gain");
   const [error, setError] = React.useState({});
 
   const findError = () => {

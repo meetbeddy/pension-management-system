@@ -1,6 +1,6 @@
 import React from "react";
 
-function TransactionHistory() {
+function TransactionHistory({ contributionsHistory }) {
   const columns = [
     {
       dataField: "amount",

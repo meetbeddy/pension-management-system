@@ -115,6 +115,18 @@ export class RegisterRsa extends Component {
     showSuccess: false,
   };
 
+  componentDidMount() {
+    this.setState({
+      firstName: JSON.parse(localStorage.getItem("profile")).user.name.split(
+        " "
+      )[0],
+      lastName: JSON.parse(localStorage.getItem("profile")).user.name.split(
+        " "
+      )[1],
+      email: JSON.parse(localStorage.getItem("profile")).user.email,
+      phone: JSON.parse(localStorage.getItem("profile")).user.phone,
+    });
+  }
   static getDerivedStateFromProps(nextProps, state) {
     if (nextProps?.errors?.message) {
       const { message } = nextProps?.errors;
@@ -133,6 +145,7 @@ export class RegisterRsa extends Component {
 
     return null;
   }
+
   getFields = (steps) => {
     const {
       title,
@@ -431,7 +444,10 @@ export class RegisterRsa extends Component {
   };
   handleSubmit = (e) => {
     e.preventDefault();
+
     const newErrors = this.findError();
+
+    console.log(newErrors);
     if (Object.keys(newErrors).length > 0) {
       this.setState({ error: newErrors });
     } else {
@@ -442,6 +458,7 @@ export class RegisterRsa extends Component {
   render() {
     const { formstep, error, disableButton, passportURL, signatureURL, terms } =
       this.state;
+
     return (
       <ContentWrapper>
         {this.state.showSuccess ? (

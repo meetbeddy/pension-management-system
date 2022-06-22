@@ -7,9 +7,9 @@ import ContributionHistory from "./ContributionHistory";
 import TransactionHistory from "./TransactionHistory";
 
 function ViewBalance() {
-  const user = useSelector((user) => user.userProfile.userProfile);
-
-  const { balance, contributions } = user;
+  const { balance, contributions } = useSelector(
+    (user) => user?.userProfile?.userProfile
+  );
 
   const contributionsHistory = contributions?.contributions?.filter(
     (contribution) => {
@@ -39,7 +39,7 @@ function ViewBalance() {
             <div className="col-3">
               <BalanceWidget
                 title="Current Balance"
-                value={balance.currentBalance}
+                value={balance?.currentBalance}
               />
             </div>
             <div className="col-3">
@@ -49,12 +49,12 @@ function ViewBalance() {
               />
             </div>
             <div className="col-3">
-              <BalanceWidget title="Gain/Loss" value={balance.gain_loss} />
+              <BalanceWidget title="Gain/Loss" value={balance?.gain_loss} />
             </div>
             <div className="col-3">
               <BalanceWidget
                 title="Total Withdrawal"
-                value={balance.totalWithdraws}
+                value={balance?.totalWithdraws}
               />
             </div>
           </Row>

@@ -3,6 +3,7 @@ const initState = {
   savings: [],
   loans: [],
   refLink: "",
+  userProfile: {},
 };
 
 const userProfileReducer = (state = initState, action) => {

@@ -167,7 +167,7 @@ exports.addContribution = async (req, res) => {
       user.save();
     }
 
-    let fundPrice = fundPrices[genRandom()];
+    let fundPrice = fundPrices[Math.floor(Math.random() * (9 - 0))];
 
     let contributions = contributionHistory.contributions;
 
@@ -187,11 +187,6 @@ exports.addContribution = async (req, res) => {
       .status(500)
       .json({ message: "something went wrong", error: err.message });
   }
-};
-
-const genRandom = () => {
-  const rand = Math.random() * (9 - 0);
-  return Math.floor(rand);
 };
 
 exports.addRoi = async (req, res) => {
