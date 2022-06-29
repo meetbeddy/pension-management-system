@@ -1,7 +1,12 @@
 import React from "react";
 
 function ProfileDetailsTab(props) {
-  const { state } = props?.location || props?.user;
+  const user = props?.location || props?.user;
+  const [state, setState] = React.useState({});
+
+  React.useEffect(() => {
+    setState(user);
+  }, [user]);
 
   return state && state ? (
     <div className="col-md-9">

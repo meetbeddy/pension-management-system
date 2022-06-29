@@ -12,15 +12,16 @@ function EmployeeProfile(props) {
 
   const employees = useSelector((state) => state?.admin.employees);
 
-  const currentEmployee = employees.filter((employee) => {
-    return employee._id === state._id;
-  })[0];
   // const user = { state: currentEmployee };
 
   const [user, setUser] = React.useState({});
   const [balanceShow, setBalanceShow] = React.useState(false);
   const [formShow, setFormShow] = React.useState(false);
-  const [type, setType] = React.useState("");
+  const [type, setType] = React.useState(null);
+
+  const currentEmployee = employees.filter((employee) => {
+    return employee?._id === user?._id;
+  })[0];
 
   const handleShowModal = () => {
     setBalanceShow(true);
@@ -40,6 +41,7 @@ function EmployeeProfile(props) {
 
   const handleCloseForm = () => {
     setFormShow(false);
+    setType(null);
   };
 
   return (
@@ -78,15 +80,18 @@ function EmployeeProfile(props) {
                   </Button>
                   <Button
                     onClick={(e) => handleShowForm(e)}
-                    className="btn btn-secondary btn-block"
+                    className="btn btn-dark font-weight-bold btn-block"
+                    id="roi"
                   >
-                    <b id="contribution">Add Contribution</b>
+                    Add ROI
                   </Button>
+
                   <Button
                     onClick={(e) => handleShowForm(e)}
-                    className="btn btn-dark btn-block"
+                    className="btn btn-secondary font-weight-bold btn-block"
+                    id="contribution"
                   >
-                    <b id="roi">Add ROI</b>
+                    Add Contribution
                   </Button>
                 </div>
               </div>

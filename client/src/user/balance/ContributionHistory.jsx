@@ -3,17 +3,36 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
+import Moment from "react-moment";
 
 function ContributionHistory({ contributionsHistory }) {
+  const showMonth = (cell, row, rowIndex, formatExtraData) => {
+    return (
+      <strong>
+        <Moment format="MMM YYYY ">{row.month}</Moment>
+      </strong>
+    );
+  };
+
+  const showAmount = (cell, row, rowIndex, formatExtraData) => {
+    return <strong className="text-success">&#8358;{row.amount} </strong>;
+  };
   const columns = [
+    {
+      dataField: "serial",
+      text: "#",
+      sort: true,
+    },
     {
       dataField: "amount",
       text: "Amount",
+      formatter: showAmount,
       sort: true,
     },
     {
       dataField: "month",
       text: "Month",
+      formatter: showMonth,
     },
   ];
 
@@ -56,14 +75,19 @@ function ContributionHistory({ contributionsHistory }) {
     ], // A numeric array is also available. the purpose of above example is custom the text
   };
 
+  contributionsHistory?.forEach((contribution, index) => {
+    contribution.serial = index + 1;
+  });
   return (
     <div className="p-3">
-      <BootstrapTable
-        keyField="_id"
-        data={contributionsHistory}
-        columns={columns}
-        pagination={paginationFactory(options)}
-      />
+      {contributionsHistory && (
+        <BootstrapTable
+          keyField="_id"
+          data={contributionsHistory}
+          columns={columns}
+          pagination={paginationFactory(options)}
+        />
+      )}
     </div>
   );
 }

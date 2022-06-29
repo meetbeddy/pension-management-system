@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row } from "react-bootstrap";
+import { Button, Row } from "react-bootstrap";
 import BalanceWidget from "../../components/utilities/BalanceWidget";
 import ContentWrapper from "../../components/utilities/ContentWrapper";
 import { useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import ContributionHistory from "./ContributionHistory";
 import TransactionHistory from "./TransactionHistory";
 
 function ViewBalance() {
+  const [toggle, setToggle] = React.useState(false);
   const { balance, contributions } = useSelector(
     (user) => user?.userProfile?.userProfile
   );
@@ -16,7 +17,6 @@ function ViewBalance() {
       return contribution.depositType === "contribution";
     }
   );
-  console.log(contributions);
 
   return (
     <ContentWrapper>
@@ -61,12 +61,20 @@ function ViewBalance() {
         </div>
 
         <div className="title m-3">
+          <Button onClick={() => setToggle(!toggle)}>
+            {!toggle ? `Show Transactions` : `Show Contribution History`}
+          </Button>
           <h5>
-            <b>TRANSACTION HISTORY</b>
+            <b> {!toggle ? `CONTRIBUTION HISTORY` : `TRANSACTION HISTORY`}</b>
           </h5>
         </div>
-        {/* <ContributionHistory contributionsHistory={contributionsHistory} /> */}
-        <TransactionHistory />
+        {!toggle ? (
+          <ContributionHistory contributionsHistory={contributionsHistory} />
+        ) : (
+          <TransactionHistory
+            contributionsHistory={contributions.contributions}
+          />
+        )}
       </div>
     </ContentWrapper>
   );
